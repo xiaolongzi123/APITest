@@ -1,0 +1,18 @@
+import datetime
+
+
+def DateRange(period, now=None, step=1):
+    dates = []
+    
+    if now is None:
+        now = datetime.datetime.now()
+    
+    step = datetime.timedelta(days=step)
+    
+    for idx in range(0, period):
+        dates.append(now)
+        now += step
+    
+    return dates
+    
+

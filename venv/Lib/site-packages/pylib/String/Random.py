@@ -1,0 +1,27 @@
+import string
+import random
+
+def RandomPassword(length=12, with_lowercase=True, with_uppercase=True, with_digits=True, with_punctuation=True):
+    choices = ""
+    password = ""
+    password_length = 0
+    
+    while True:
+        if password_length >= length:
+            break
+        if with_lowercase:
+            password += random.choice(string.ascii_lowercase)
+            password_length += 1
+        if with_uppercase:
+            password += random.choice(string.ascii_uppercase)
+            password_length += 1
+        if with_digits:
+            password += random.choice(string.digits)
+            password_length += 1
+        if with_punctuation:
+            password += random.choice(string.punctuation)
+            password_length += 1
+    
+    password_array = list(password)
+    random.shuffle(password_array)
+    return "".join(password_array[:length])

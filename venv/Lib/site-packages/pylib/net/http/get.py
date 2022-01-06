@@ -1,0 +1,22 @@
+import os
+import requests
+
+
+
+def download(url, savefile, chunk_size=1024*64):
+    """download url and save to file.
+    """
+    savedir = os.path.dirname(savefile)
+    if savedir and not os.path.isdir(savedir):
+        os.makedirs(savedir)
+    
+    size = 0
+    resp = requests.get(url, stream=True)
+    with open(savefile, "wb") as f:
+        for chunk in resp.iter_content(chunk_size=1024*64):
+            if chunk:
+                f.write(chunk)
+                size += len(chunk)
+    return size
+
+

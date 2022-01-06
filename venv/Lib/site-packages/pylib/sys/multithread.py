@@ -1,0 +1,40 @@
+from __future__ import print_function
+
+import threading
+try:
+    from queue import Queue
+except ImportError:
+    from Queue import Queue
+
+
+def MultiThreadMap(func, datalist, worker_number=None):
+    def _worker(task_queue, func):
+        while True:
+            try:
+                task = task_queue.get_nowait()
+            except Empty:
+                break
+            func(task)
+    
+    task_queue = Queue()
+    for data in datalist:
+        task_queue.put(data)
+    
+    if worker_number is None:
+        worker_number = int(len(datalist)/4.0)
+        
+    workers = []
+    for idx in range(0, worker_number):
+        worker = threading.Thread(target=_worker, args=(task_queue, func))
+        worker.setDaemon(True)
+        worker.start()
+        workers.append(worker)
+    
+    for worker in workers:
+        worker.join()
+
+SafePrintLock = threading.Lock()
+def SafePrint(*args, **kwargs):
+    with SafePrintLock:
+        print(*args, **kwargs)
+

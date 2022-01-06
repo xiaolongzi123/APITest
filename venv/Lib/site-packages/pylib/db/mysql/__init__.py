@@ -1,0 +1,45 @@
+import six
+try:
+    from MySQLdb import connect as mysql_connect
+except:
+    from mysql.connector import connect as mysql_connect
+
+from ..url import ConnectStringParse
+
+
+def GetDBName(path):
+    names = path.split("/")
+    for name in names:
+        if name:
+            return name
+    return None
+
+def Connect(connect_string):
+    params = {
+        "host": "localhost",
+        "port": 3306,
+        "user": "root",
+        "passwd": "",
+        "db": None
+    }
+    
+    if isinstance(connect_string, six.string_types):
+        conn_params = ConnectStringParse(connect_string)
+    else:
+        conn_params = connect_string
+    
+    update = {
+        "host": conn_params["hostname"],
+        "port": conn_params["port"],
+        "user": conn_params["username"],
+        "passwd": conn_params["password"],
+        "db": GetDBName(conn_params["name"]),
+    }
+    
+    for key in update:
+        if update[key]:
+            params[key] = update[key]
+    
+    return mysql_connect(**params)
+
+

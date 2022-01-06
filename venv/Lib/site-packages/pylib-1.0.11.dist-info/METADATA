@@ -1,0 +1,23 @@
+Metadata-Version: 2.0
+Name: pylib
+Version: 1.0.11
+Summary: Python private library
+Home-page: http://www.komect.com/
+Author: Huang Jiangbin
+Author-email: huangjiangbin@chinamobile.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+
+UNKNOWN
+
+

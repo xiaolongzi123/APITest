@@ -1,0 +1,14 @@
+
+
+
+
+def MakeKey(prefix="", *args, **kwargs):
+    key = prefix
+    key += "".join([str(x) for x in args])
+    ks = list(kwargs.keys())
+    ks.sort()
+    for k in ks:
+        key += str(k) + str(kwargs[k])
+    return key
+
+

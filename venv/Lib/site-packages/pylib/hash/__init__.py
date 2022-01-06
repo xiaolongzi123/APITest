@@ -1,0 +1,32 @@
+import hashlib
+
+
+DEFAULT_CHUNK_SIZE=1024*64
+
+def get_file_hash(hash_method, file1, chunk_size=DEFAULT_CHUNK_SIZE):
+    generator = hash_method()
+    if os.path.isfile(file1):
+        with open(file1, "rb") as f:
+            chunk = f.read(chunk_size)
+            if chunk:
+                generator.update(chunk)
+    return generator.hexdigest()
+
+def get_file_md5(file1, chunk_size=DEFAULT_CHUNK_SIZE):
+    return get_file_hash(hashlib.md5, file1, chunk_size)
+
+def get_file_sha1(file1, chunk_size=DEFAULT_CHUNK_SIZE):
+    return get_file_hash(hashlib.sha1, file1, chunk_size)
+
+def get_file_sha224(file1, chunk_size=DEFAULT_CHUNK_SIZE):
+    return get_file_hash(hashlib.sha224, chunk_size)
+
+def get_file_sha256(file1, chunk_size=DEFAULT_CHUNK_SIZE):
+    return get_file_hash(hashlib.sha256, chunk_size)
+
+def get_file_sha384(file1, chunk_size=DEFAULT_CHUNK_SIZE):
+    return get_file_hash(hashlib.sha384, chunk_size)
+
+def get_file_sha512(file1, chunk_size=DEFAULT_CHUNK_SIZE):
+    return get_file_hash(hashlib.sha512, chunk_size)
+

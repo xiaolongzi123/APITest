@@ -1,0 +1,16 @@
+try:
+    from urlparse import urlparse
+except ImportError:
+    from urllib.parse import urlparse
+
+def ConnectStringParse(conn_string):
+    info = urlparse(conn_string)
+    return {
+        "engine": info.scheme,
+        "hostname": info.hostname,
+        "port": info.port,
+        "username": info.username,
+        "password": info.password,
+        "name": info.path,
+    }
+
